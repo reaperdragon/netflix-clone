@@ -1,5 +1,6 @@
 import Head from "next/head";
 import { Banner, Header, Row } from "../components";
+import useAuth from "../hooks/useAuth";
 import { Movie } from "../typing";
 import requests from "../utils/request";
 
@@ -24,6 +25,9 @@ const Home = ({
   topRated,
   trendingNow,
 }: Props) => {
+  const { logOut, loading } = useAuth();
+
+  if (loading) return "Loading!...";
   return (
     <div className="relative h-screen bg-gradient-to-b lg:h-[140vh] w-full ">
       <Head>
@@ -31,7 +35,7 @@ const Home = ({
         <link rel="icon" href="/favicon.io" />
       </Head>
       <Header />
-      <main className="relative pl-4 pb-24 lg:space-y-24 lg:pl-16 ">
+      <main className="relative pl-4 pb-24 lg:space-y-24 lg:pl-16">
         <Banner netflixOriginals={netflixOriginals} />
         <section className="md:space-y-24">
           <Row title="Trending Now" movies={trendingNow} />
