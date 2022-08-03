@@ -1,5 +1,7 @@
 import Head from "next/head";
-import { Banner, Header, Row } from "../components";
+import { useRecoilValue } from "recoil";
+import { modalState } from "../atoms/modalAtom";
+import { Banner, Header, Modal, Row } from "../components";
 import useAuth from "../hooks/useAuth";
 import { Movie } from "../typing";
 import requests from "../utils/request";
@@ -26,6 +28,7 @@ const Home = ({
   trendingNow,
 }: Props) => {
   const { logOut, loading } = useAuth();
+  const showModal = useRecoilValue(modalState);
 
   if (loading) return "Loading!...";
   return (
@@ -49,6 +52,7 @@ const Home = ({
           <Row title="Documentaries" movies={documentaries} />
         </section>
       </main>
+      {showModal && <Modal />}
     </div>
   );
 };
