@@ -50,8 +50,6 @@ const Modal = () => {
     fetchMovie();
   }, [movie]);
 
-  console.log(trailer);
-
   return (
     <MuiModal
       open={showModal}
